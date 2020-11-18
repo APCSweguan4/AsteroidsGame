@@ -2,11 +2,11 @@ class Spaceship extends Floater
 {   
  private int[] rocketXPoints, rocketYPoints;
  public Spaceship() { //constructor
-   rocketXPoints = new int[]{-2, -6, -25, -6};
-   rocketYPoints = new int[]{0, -4, 0, 4};
-   corners = 4; 
-   xCorners = new int[]{-8, 10, -8, -2};   
-   yCorners = new int[]{-6, 0, 6, 0};  
+   rocketXPoints = new int[]{-2, -6, -25, -6, -2};
+   rocketYPoints = new int[]{0, -4, 0, 4, 0};
+   corners = 5; 
+   xCorners = new int[]{-8, 10, -8, -2, -8};   
+   yCorners = new int[]{-6, 0, 6, 0, -6};  
    myColor = color(255, 255, 255);   
    myCenterX = myCenterY = 300; 
    myXspeed = myYspeed = 0;
