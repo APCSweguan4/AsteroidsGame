@@ -1,6 +1,7 @@
 private Spaceship player = new Spaceship();
 private Star[] sky = new Star[500];
 private boolean leftPressed, rightPressed, accelerating = false;
+private boolean backgroundON = true;
 public boolean getAccelerating() {
   return accelerating;
 }
@@ -16,7 +17,9 @@ public void setup()
 }
 public void draw() 
 {
-  background(0);
+  if(backgroundON) {
+    background(0);
+  }
   for(int i = 0; i < sky.length; i++) {
     sky[i].show();  
   }
@@ -40,9 +43,11 @@ public void keyPressed() {
     rightPressed = true;  
   }
   if(keyCode == SHIFT) {
+    backgroundON = false;
     fill(255, 255, 255, 150);
     ellipse((float)player.getCenterX(), (float)player.getCenterY(), 80, 80);
     player.hyperspace();
+    backgroundON = true;
   }
   if(key == 'w' || key == 'W'){
     accelerating = true;
