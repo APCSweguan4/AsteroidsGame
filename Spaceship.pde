@@ -51,10 +51,15 @@ class Spaceship extends Floater
    setYspeed(0);
    setPointDirection((int)(Math.random() * 361));
  }
- public void show () {//Draws the floater at the current position             
-   fill(myColor);   
-   stroke(myColor);    
-    
+ public void show (boolean hyperspacing) {//Draws the floater at the current position             
+   if (hyperspacing == false) { 
+     fill(myColor);   
+     stroke(myColor);   
+   } else {
+     noFill();
+     noStroke();
+   }
+   
    //translate the (x,y) center of the ship to the correct position
    translate((float)myCenterX, (float)myCenterY);
    
@@ -71,7 +76,7 @@ class Spaceship extends Floater
    }
    endShape(CLOSE);
 
-   if(getAccelerating()) {
+   if((getAccelerating() == true)&& (hyperspacing == false)) {
      fill(255, 0, 0, 200);
      noStroke();
      beginShape();
