@@ -1,11 +1,13 @@
 private Spaceship player = new Spaceship();
 private Star[] sky = new Star[500];
-private boolean leftPressed, rightPressed, accelerating = false;
+private boolean leftPressed, rightPressed, accelerating, hyperspacing = false;
+private int countdown = 10;
 public boolean getAccelerating() {
   return accelerating;
 }
 public void setup() 
 {
+  frameRate = 60;
   size(600, 600);
   for(int i = 0; i < sky.length; i++) {
     sky[i] = new Star();  
@@ -16,12 +18,29 @@ public void setup()
 }
 public void draw() 
 {
-  background(0);
+  if(hyperspacing == false) {
+    background(0);
+  } else {
+    if(countdown % 15 == 0) {
+      fill(205, 205, 205, 10);
+      stroke(205, 205, 205, 10);
+      rect(-10, -10, 610, 610);
+    }
+    if (countdown % 10 == 0) {
+      fill(0);
+      stroke(0);
+      rect(-10, -10, 610, 610);
+    }
+    countdown--;
+    if(countdown == 0) {
+      hyperspacing = false;  
+    }
+  }
   for(int i = 0; i < sky.length; i++) {
     sky[i].show();  
   }
   player.move();
-  player.show();
+  player.show(hyperspacing);
   if(leftPressed) {
     player.turn(-5);
   }
@@ -40,6 +59,8 @@ public void keyPressed() {
     rightPressed = true;  
   }
   if(keyCode == SHIFT) {
+    countdown = 30;
+    hyperspacing = true;
     player.hyperspace();
   }
   if(key == 'w' || key == 'W'){
