@@ -3,7 +3,6 @@ private Spaceship player = new Spaceship();
 private Star[] sky = new Star[500];
 private boolean leftPressed, rightPressed, accelerating, hyperspacing = false;
 private int countdown = 10;
-private int level = 0;
 public boolean getAccelerating() {
   return accelerating;
 }
@@ -17,18 +16,12 @@ public void setup()
   for (int i = 0; i < 41; i++) {
     sky[i] = new Planet();
   }
-  for (int i = 0; i < 3; i++) {
+  for (int i = 0; i < 6; i++) {
     asteroids.add(new Asteroid());
   }
 }
 public void draw() 
 {
-  if (asteroids.size() == 0) {
-    level++;
-    for (int i = 0; i < (3 + level); i++) {
-      asteroids.add(new Asteroid());
-    }
-  }
   if (hyperspacing == false) {
     background(0);
   } else {
@@ -71,11 +64,6 @@ public void draw()
   if (accelerating) {
     player.accelerate(0.08);
   }
-  stroke(255);
-  color(255);
-  fill(255);
-  textSize(20);
-  text("Level: " + (level + 1), 5, 20);
 }
 public void keyPressed() {
   if (key == 'a' || key == 'A') {
