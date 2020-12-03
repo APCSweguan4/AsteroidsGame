@@ -44,7 +44,7 @@ public void draw()
     sky[i].show();
   }
   for (int i = 0; i < asteroids.size(); i++) {
-    if (dist((float)player.getCenterX(), (float)player.getCenterY(), (float)asteroids.get(i).getCenterX(), (float)asteroids.get(i).getCenterY()) < 20) {
+    if (dist((float)player.getCenterX(), (float)player.getCenterY(), (float)asteroids.get(i).getCenterX(), (float)asteroids.get(i).getCenterY()) < 27) {
       asteroids.remove(i);
     } else {
       if (!hyperspacing) {
