@@ -16,7 +16,7 @@ public void setup()
   for (int i = 0; i < 41; i++) {
     sky[i] = new Planet();
   }
-  for (int i = 0; i < 6; i++) {
+  for (int i = 0; i < ((int)(Math.random() * 8) + 3); i++) {
     asteroids.add(new Asteroid());
   }
 }
