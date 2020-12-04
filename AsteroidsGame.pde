@@ -2,7 +2,7 @@ private ArrayList <Asteroid> asteroids = new ArrayList <Asteroid>();
 private Spaceship player = new Spaceship();
 private Star[] sky = new Star[500];
 private boolean leftPressed, rightPressed, accelerating, hyperspacing = false;
-private int countdown = 10;
+private int countdown = 30;
 public boolean getAccelerating() {
   return accelerating;
 }
