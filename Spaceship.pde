@@ -1,5 +1,6 @@
 class Spaceship extends Floater  
 {   
+ private boolean invinsible;
  private int[] rocketXPoints, rocketYPoints;
  public Spaceship() { //constructor
    rocketXPoints = new int[]{-2, -6, -25, -6, -2};
@@ -11,6 +12,7 @@ class Spaceship extends Floater
    myCenterX = myCenterY = 300; 
    myXspeed = myYspeed = 0;
    myPointDirection = (int)(Math.random() * 361);  
+   invinsible = false;
  }
  //setters & getters
  public void setXspeed(double speed) {
@@ -42,6 +44,9 @@ class Spaceship extends Floater
  }
  public double getPointDirection() {
    return myPointDirection;  
+ }
+ public boolean getInvinsible() {
+   return invinsible;  
  }
  //^^ end of setters & getters ^^
  public void hyperspace() {
@@ -89,4 +94,16 @@ class Spaceship extends Floater
    rotate(-1*dRadians);
    translate(-1*(float)myCenterX, -1*(float)myCenterY);
   }   
+  public void invinsibility() {
+    if (invinsible == false) {
+      invinsible = true;
+    } else {
+      invinsible = false; 
+    }
+  }
+  public void invinRing() {
+    noFill();
+    stroke(0, 0, 255);
+    ellipse((float)myCenterX, (float)myCenterY, 35, 35);
+  }
 }
