@@ -167,6 +167,10 @@ public void keyPressed() {
     player.invinsibility();
     lives = 3;
   }
+  if (key == 'd') {
+    playerAlive = false;
+    lives = 0;
+  }
 }
 public void keyReleased() {
   if (key == 'a' || key == 'A') {
@@ -206,11 +210,11 @@ public void gameOver() {
     stroke(255, 0, 0);
     fill(255, 0, 0);
     textSize(80);
-    text("GAME OVER", 70, 300);
+    text("GAME OVER", 65, 300);
     stroke(255);
     fill(255);
     textSize(20);
-    text("Press 'R' To Restart", 200, 350);
+    text("Press 'R' To Restart", 205, 350);
   }
 }
 
