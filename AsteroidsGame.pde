@@ -2,7 +2,7 @@ private ArrayList <Asteroid> asteroids = new ArrayList <Asteroid>();
 private ArrayList <Bullet> bullets = new ArrayList <Bullet>();
 private Spaceship player = new Spaceship();
 private Star[] sky = new Star[500];
-private boolean leftPressed, rightPressed, accelerating, hyperspacing, shooting = false;
+private boolean leftPressed, rightPressed, accelerating, hyperspacing = false;
 private int countdown = 30;
 private int shotCooldown = 0;
 public boolean getAccelerating() {
@@ -64,6 +64,15 @@ public void draw()
       bullets.remove(i);
     }
   }
+  for (int i = 0; i < bullets.size(); i++) {
+    for (int nI = 0; nI < asteroids.size(); nI++) {
+      if (dist((float)bullets.get(i).getCenterX(), (float)bullets.get(i).getCenterY(), (float)asteroids.get(nI).getCenterX(), (float)asteroids.get(nI).getCenterY()) < 25) {
+        asteroids.remove(nI);
+        bullets.remove(i);
+        break;
+      }
+    }
+  }
   player.move();
   player.show(hyperspacing);
   if (leftPressed) {
@@ -75,15 +84,8 @@ public void draw()
   if (accelerating) {
     player.accelerate(0.04);
   }
-  if (shooting && (shotCooldown == 0)) {
-    bullets.add(new Bullet(player));  
-  }
-  if (shooting) {
-    if (shotCooldown > 0) {
-      shotCooldown--;
-    } else {
-      shotCooldown = 10;  
-    }
+  if (shotCooldown > 0) {
+    shotCooldown--;
   }
 }
 public void keyPressed() {
@@ -102,7 +104,10 @@ public void keyPressed() {
     accelerating = true;
   }
   if (key == ' ') {
-    shooting = true;  
+    if (shotCooldown == 0) {
+      bullets.add(new Bullet(player));
+    }
+    shotCooldown = 10;
   }
 }
 public void keyReleased() {
@@ -114,8 +119,5 @@ public void keyReleased() {
   }
   if (key == 'w' || key == 'W') {
     accelerating = false;
-  }
-  if (key == ' ') {
-    shooting = false; 
   }
 }
