@@ -167,10 +167,6 @@ public void keyPressed() {
     player.invinsibility();
     lives = 3;
   }
-  if (key == 'd') {
-    playerAlive = false;
-    lives = 0;
-  }
 }
 public void keyReleased() {
   if (key == 'a' || key == 'A') {
