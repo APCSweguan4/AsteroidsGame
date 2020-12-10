@@ -115,6 +115,12 @@ public void draw()
     if (rightPressed) {
       player.turn(5);
     }
+    if (playerAlive) {
+      fill(0);
+      stroke(255);
+      rect(5, 5, 200, 50, 7);
+      showHealth();
+    }
     if (accelerating) {
       player.accelerate(0.04);
     }
@@ -222,4 +228,18 @@ public void deathAni() {
   player = new Spaceship();
   invinTimer = 120;
   player.invinsibility();
+}
+
+public void showHealth() {
+  ArrayList <Spaceship> health = new ArrayList <Spaceship>();
+  textSize(20);
+  stroke(255);
+  fill(255);
+  text("Lives:", 10, 30);
+  for (int x = 0; x < lives; x += 1){
+    health.add(new Spaceship(20 * (x + 1) + 60));
+  }
+  for (int i = 0; i < health.size(); i++) {
+    health.get(i).show();  
+  }
 }
