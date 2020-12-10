@@ -78,6 +78,7 @@ public void draw()
           asteroids.get(i).move();
         }
         asteroids.get(i).show();
+        strokeWeight(3);
       }
     }
     for (int i = 0; i < bullets.size(); i++) {
