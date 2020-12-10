@@ -14,6 +14,19 @@ class Spaceship extends Floater
    myPointDirection = (int)(Math.random() * 361);  
    invinsible = false;
  }
+  public Spaceship(int x) { //dummy constructor
+   rocketXPoints = new int[]{-1, -3, -12, -3, -1};
+   rocketYPoints = new int[]{0, -2, 0, 2, 0};
+   corners = 5; 
+   xCorners = new int[]{-4, 5, -4, -1, -4};   
+   yCorners = new int[]{-3, 0, 3, 0, -3};  
+   myColor = color(255, 255, 255);   
+   myCenterX = x;
+   myCenterY = 23; 
+   myXspeed = myYspeed = 0;
+   myPointDirection = 270;
+   invinsible = false;
+ }
  //setters & getters
  public void setXspeed(double speed) {
    myXspeed = speed;
