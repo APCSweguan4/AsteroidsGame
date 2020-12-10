@@ -9,6 +9,7 @@ private int shotCooldown = 0;
 private int deathCountdown = 60;
 private int invinTimer = 120;
 private int lives = 3;
+private int invinCooldown = 360;
 public boolean getAccelerating() {
   return accelerating;
 }
@@ -25,7 +26,7 @@ public void setup()
   for (int i = 0; i < ((int)(Math.random() * 8) + 3); i++) {
     asteroids.add(new Asteroid());
   }
-  player.invinsibility();
+  player.invincibility();
 }
 public void draw() 
 {
@@ -33,12 +34,16 @@ public void draw()
      playerAlive = false;  
   }
   if (playerAlive) {
-    if (player.getInvinsible() && (invinTimer > 0)) {
+    if (player.getinvincible() && (invinTimer > 0)) {
+      invinCooldown = 300;
       invinTimer--;
     } else { 
-      invinTimer = 300;
-      if (player.getInvinsible()) {
-        player.invinsibility();
+      invinTimer = 360;
+      if (invinCooldown > 0) {
+        invinCooldown--;
+      }
+      if (player.getinvincible()) {
+        player.invincibility();
       }
     }
     if (hyperspacing == false) {
@@ -65,7 +70,7 @@ public void draw()
     for (int i = 0; i < asteroids.size(); i++) {
       if (dist((float)player.getCenterX(), (float)player.getCenterY(), (float)asteroids.get(i).getCenterX(), (float)asteroids.get(i).getCenterY()) < 27) {
         asteroids.remove(i);
-        if (player.getInvinsible() == false) {
+        if (player.getinvincible() == false) {
           if (lives > 0) { 
             lives--;
             if(lives >= 1) {
@@ -103,7 +108,7 @@ public void draw()
         }
       }
     }
-    if (player.getInvinsible() && (invinTimer > 0)) {
+    if (player.getinvincible() && (invinTimer > 0)) {
       if (!hyperspacing)
         player.invinRing();
     }
@@ -116,7 +121,7 @@ public void draw()
       player.turn(5);
     }
     if (playerAlive) {
-      fill(0);
+      fill(0, 0, 0, 10);
       stroke(255);
       rect(5, 5, 200, 50, 7);
       showHealth();
@@ -171,8 +176,14 @@ public void keyPressed() {
     }
     player = new Spaceship();
     invinTimer = 120;
-    player.invinsibility();
+    player.invincibility();
     lives = 3;
+  }
+  if (key == '1') {
+    if (player.getinvincible() == false && invinCooldown == 0) {
+      invinCooldown = 360;
+      player.invincibility();  
+    }
   }
 }
 public void keyReleased() {
@@ -227,7 +238,7 @@ public void deathAni() {
   playerAlive = true;
   player = new Spaceship();
   invinTimer = 120;
-  player.invinsibility();
+  player.invincibility();
 }
 
 public void showHealth() {
