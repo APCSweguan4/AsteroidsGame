@@ -56,9 +56,13 @@ public void draw()
     }
   }
   for (int i = 0; i < bullets.size(); i++) {
-    bullets.get(i).die();
+    if(!hyperspacing) {
+      bullets.get(i).die();
+    }
     if (bullets.get(i).getLifetime() > 0) {
-      bullets.get(i).move();
+      if (!hyperspacing) {
+        bullets.get(i).move();
+      }
       bullets.get(i).show();
     } else {
       bullets.remove(i);
