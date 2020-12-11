@@ -38,8 +38,6 @@ public void setup()
 public void draw() 
 {
   if (asteroids.size() == 0) {
-    if(!player.getinvincible())
-      player.invincibility();
     if (points < 1500) {
       for (int i = 0; i < (5 + (points / 300)); i++) {
         if (Math.random() < 0.5) {
