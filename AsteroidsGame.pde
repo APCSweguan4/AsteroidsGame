@@ -24,7 +24,11 @@ public void setup()
     sky[i] = new Planet();
   }
   for (int i = 0; i < 5; i++) {
-    asteroids.add(new Asteroid());
+    if (Math.random() < 0.5) {
+      asteroids.add(new Asteroid());
+    } else {
+      asteroids.add(new smallAsteroid(Math.random() * 601, Math.random() * 601));
+    }
   }
   player.invincibility();
 }
@@ -33,11 +37,19 @@ public void draw()
   if (asteroids.size() == 0) {
     if (points < 1500) {
       for (int i = 0; i < (5 + (points / 300)); i++) {
-        asteroids.add(new Asteroid());
+        if (Math.random() < 0.5) {
+          asteroids.add(new Asteroid());
+        } else {
+          asteroids.add(new smallAsteroid(Math.random() * 601, Math.random() * 601));
+        }
       }
     } else {
       for (int i = 0; i < 10; i++) {
-        asteroids.add(new Asteroid());
+        if (Math.random() < 0.5) {
+          asteroids.add(new Asteroid());
+        } else {
+          asteroids.add(new smallAsteroid(Math.random() * 601, Math.random() * 601));
+        }
       }
     }
   }
@@ -121,6 +133,8 @@ public void draw()
         if (dist((float)bullets.get(i).getCenterX(), (float)bullets.get(i).getCenterY(), (float)asteroids.get(nI).getCenterX(), (float)asteroids.get(nI).getCenterY()) < 25) {
           if (asteroids.get(nI).getSmall() == false) {
             points += 20;  
+            asteroids.add(new smallAsteroid(asteroids.get(nI).getCenterX(), asteroids.get(nI).getCenterY()));
+            asteroids.add(new smallAsteroid(asteroids.get(nI).getCenterX(), asteroids.get(nI).getCenterY()));
           } else if (asteroids.get(nI).getSmall()) {
             points += 50;
           }
