@@ -1,3 +1,4 @@
+//Note to self: remember to implement pathfinding UFO enemies
 private ArrayList <Asteroid> asteroids = new ArrayList <Asteroid>();
 private ArrayList <Bullet> bullets = new ArrayList <Bullet>();
 private Spaceship player = new Spaceship();
@@ -209,14 +210,20 @@ public void keyPressed() {
     }
     bullets = new ArrayList <Bullet>();
     asteroids = new ArrayList <Asteroid>();
-    for (int i = 0; i < ((int)(Math.random() * 8) + 3); i++) {
-      asteroids.add(new Asteroid());
+    for (int i = 0; i < 5; i++) {
+      if (Math.random() < 0.5) {
+        asteroids.add(new Asteroid());
+      } else {
+        asteroids.add(new smallAsteroid(Math.random() * 601, Math.random() * 601));
+      }
     }
     player = new Spaceship();
     invinTimer = 120;
+    invinCooldown = 360;
     player.invincibility();
     lives = 3;
     points = 0;
+    addHealth = 0;
   }
   if (key == '1') {
     if (player.getinvincible() == false && invinCooldown == 0) {
