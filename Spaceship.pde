@@ -133,6 +133,6 @@ class Spaceship extends Floater
   public void repulRing() {
     fill(255, 0, 255, 100);
     stroke(255, 0, 255);
-    ellipse((float)myCenterX, (float)myCenterY, 150, 150);
+    ellipse((float)myCenterX, (float)myCenterY, 75, 75);
   }
 }
