@@ -70,8 +70,20 @@ class Asteroid extends Floater {
     }
     public double getCenterY() {
       return myCenterY;
-  }
-  public boolean getSmall() {
-    return isSmall;  
-  }
+    }
+    public boolean getSmall() {
+      return isSmall;  
+    }
+    public void setXspeed(int x) {
+      myXspeed = x;
+    }
+    public void setYspeed(int y) {
+      myYspeed = y;
+    }
+    public double getXspeed() {
+      return myXspeed;  
+    }
+    public double getYspeed() {
+      return myYspeed; 
+    }
 }
