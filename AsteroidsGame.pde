@@ -5,7 +5,7 @@ private Star[] sky = new Star[500];
 private boolean leftPressed, rightPressed, accelerating, hyperspacing = false;
 private boolean playerAlive = true;
 private int countdown = 30;
-private int shotCooldown = 0;
+private int shotCooldown, points = 0;
 private int deathCountdown = 60;
 private int invinTimer = 120;
 private int lives = 3;
@@ -23,23 +23,39 @@ public void setup()
   for (int i = 0; i < 41; i++) {
     sky[i] = new Planet();
   }
-  for (int i = 0; i < ((int)(Math.random() * 8) + 3); i++) {
+  for (int i = 0; i < 5; i++) {
     asteroids.add(new Asteroid());
   }
   player.invincibility();
 }
 public void draw() 
 {
+  if (asteroids.size() == 0) {
+    if (points < 1500) {
+      for (int i = 0; i < (5 + (points / 300)); i++) {
+        asteroids.add(new Asteroid());
+      }
+    } else {
+      for (int i = 0; i < 10; i++) {
+        asteroids.add(new Asteroid());
+      }
+    }
+  }
   if (lives == 0) {
      playerAlive = false;  
   }
+  if (points != 0 && points % 1000 == 0) {
+    if (lives != 6) {
+      lives++;
+    }
+  }
   if (playerAlive) {
-    if (player.getinvincible() && (invinTimer > 0)) {
+    if (player.getinvincible() && (invinTimer > 0) && !hyperspacing) {
       invinCooldown = 300;
       invinTimer--;
     } else { 
       invinTimer = 360;
-      if (invinCooldown > 0) {
+      if (invinCooldown > 0 && !hyperspacing) {
         invinCooldown--;
       }
       if (player.getinvincible()) {
@@ -102,6 +118,11 @@ public void draw()
     for (int i = 0; i < bullets.size(); i++) {
       for (int nI = 0; nI < asteroids.size(); nI++) {
         if (dist((float)bullets.get(i).getCenterX(), (float)bullets.get(i).getCenterY(), (float)asteroids.get(nI).getCenterX(), (float)asteroids.get(nI).getCenterY()) < 25) {
+          if (asteroids.get(nI).getSmall() == false) {
+            points += 20;  
+          } else if (asteroids.get(nI).getSmall()) {
+            points += 50;
+          }
           asteroids.remove(nI);
           bullets.remove(i);
           break;
@@ -115,16 +136,17 @@ public void draw()
     player.move();
     player.show(hyperspacing);
     if (leftPressed) {
-      player.turn(-5);
+      player.turn(-2.5);
     }
     if (rightPressed) {
-      player.turn(5);
+      player.turn(2.5);
     }
     if (playerAlive) {
       fill(0, 0, 0, 10);
       stroke(255);
       rect(5, 5, 200, 100, 7);
       showHealth();
+      showPoints();
       showInvinCD();
     }
     if (accelerating) {
@@ -179,6 +201,7 @@ public void keyPressed() {
     invinTimer = 120;
     player.invincibility();
     lives = 3;
+    points = 0;
   }
   if (key == '1') {
     if (player.getinvincible() == false && invinCooldown == 0) {
@@ -256,19 +279,26 @@ public void showHealth() {
   }
 }
 
+public void showPoints() {
+   stroke(255);
+   fill(255);
+   textSize(20);
+   text("Points: " + points, 10, 57.5);
+}
+
 public void showInvinCD() {
    stroke(255);
    fill(255);
    textSize(20);
-   text("1 CD:", 10, 57.5);
+   text("1 CD:", 10, 85);
    if (invinCooldown > 0) {
      stroke(255);
      strokeWeight(1);
      fill(0, 0, 255);
-     rect(70, 40, invinCooldown / 3, 20, 7);
+     rect(70, 67.5, invinCooldown / 3, 20, 7);
    } else {
      stroke(0, 255, 0);
      fill(0, 255, 0);
-     text("READY!", 70, 57.5);
+     text("READY!", 70, 85);
    }
 }
