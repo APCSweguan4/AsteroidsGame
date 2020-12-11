@@ -136,10 +136,10 @@ public void draw()
     player.move();
     player.show(hyperspacing);
     if (leftPressed) {
-      player.turn(-2.5);
+      player.turn(-4);
     }
     if (rightPressed) {
-      player.turn(2.5);
+      player.turn(4);
     }
     if (playerAlive) {
       fill(0, 0, 0, 10);
