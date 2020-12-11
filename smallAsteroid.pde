@@ -4,13 +4,13 @@ class smallAsteroid extends Asteroid {
     randNum = Math.random();
     rotSpeed = Math.random() * 11 - 5;
     if (randNum < 0.5)  {
-      corners = 6;
-      xCorners = new int[]{-13, 13, 20, 13, -13, -20};
-      yCorners = new int[]{-15, -15, 0, 15, 15, 0};
+      corners = 7;
+      xCorners = new int[]{-5, -2, 5, 9, 6, -5, -9};
+      yCorners = new int[]{-5, -8, -8, 0, 8, 8, 0};
     } else {
-      corners = 6;
-      xCorners = new int[]{-13, 13, 20, 13, -13, -20};
-      yCorners = new int[]{-15, -15, 0, 15, 15, 0};
+      corners = 5;
+      xCorners = new int[]{-5, 5, 8, 0, -8};
+      yCorners = new int[]{-5, -5, 5, 10, 5};
     }
     myColor = color(155);
     myCenterX = centerX;
