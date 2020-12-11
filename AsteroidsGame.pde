@@ -10,7 +10,8 @@ private int shotCooldown, points, addHealth = 0;
 private int deathCountdown = 60;
 private int invinTimer = 120;
 private int lives = 3;
-private int invinCooldown, repulCooldown = 360;
+private int invinCooldown = 360;
+private int repulCooldown = 420;
 private int repulTimer = 60;
 public boolean getAccelerating() {
   return accelerating;
@@ -80,7 +81,7 @@ public void draw()
       }
     }
     if (player.getRepul() && (repulTimer > 0) && !hyperspacing) {
-      repulCooldown = 360;
+      repulCooldown = 420;
       repulTimer--;
     } else {
       repulTimer = 360;
@@ -185,7 +186,7 @@ public void draw()
     if (playerAlive) {
       fill(0, 0, 0, 10);
       stroke(255);
-      rect(5, 5, 200, 150, 7);
+      rect(5, 5, 250, 150, 7);
       showHealth();
       showPoints();
       showInvinCD();
@@ -251,7 +252,7 @@ public void keyPressed() {
     points = 0;
     addHealth = 0;
     repulTimer = 60;
-    repulCooldown = 360;
+    repulCooldown = 420;
   }
   if (key == '1') {
     if (player.getinvincible() == false && invinCooldown == 0) {
@@ -261,7 +262,7 @@ public void keyPressed() {
   }
   if (key == '2') {
     if (player.getRepul() == false && repulCooldown == 0) {
-      repulCooldown = 360;
+      repulCooldown = 420;
       player.repulsion();
     }
   }
