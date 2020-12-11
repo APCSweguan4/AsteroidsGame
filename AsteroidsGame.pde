@@ -37,6 +37,8 @@ public void setup()
 public void draw() 
 {
   if (asteroids.size() == 0) {
+    if(!player.getinvincible())
+      player.invincibility();
     if (points < 1500) {
       for (int i = 0; i < (5 + (points / 300)); i++) {
         if (Math.random() < 0.5) {
@@ -58,7 +60,7 @@ public void draw()
   if (lives == 0) {
      playerAlive = false;  
   }
-  if (points != 0 && points % 1000 == 0 && points / 1000 != addHealth) {
+  if (points != 0 && points / 1000 != addHealth) {
     if (lives != 6) {
       addHealth++;
       lives++;
