@@ -1,6 +1,6 @@
 class Asteroid extends Floater {
-  private boolean isSmall;
-  private double rotSpeed, randNum;
+  protected boolean isSmall;
+  protected double rotSpeed, randNum;
   public Asteroid() {
     isSmall = false;
     randNum = Math.random();
