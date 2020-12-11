@@ -10,7 +10,8 @@ private int shotCooldown, points, addHealth = 0;
 private int deathCountdown = 60;
 private int invinTimer = 120;
 private int lives = 3;
-private int invinCooldown = 360;
+private int invinCooldown, repulCooldown = 360;
+private int repulTimer = 60;
 public boolean getAccelerating() {
   return accelerating;
 }
@@ -65,7 +66,7 @@ public void draw()
   }
   if (playerAlive) {
     if (player.getinvincible() && (invinTimer > 0) && !hyperspacing) {
-      invinCooldown = 300;
+      invinCooldown = 360;
       invinTimer--;
     } else { 
       invinTimer = 360;
@@ -74,6 +75,18 @@ public void draw()
       }
       if (player.getinvincible()) {
         player.invincibility();
+      }
+    }
+    if (player.getRepul() && (repulTimer > 0) && !hyperspacing) {
+      repulCooldown = 360;
+      repulTimer--;
+    } else {
+      repulTimer = 360;
+      if (repulCooldown > 0 && !hyperspacing) {
+        repulCooldown--;
+      }
+      if (player.getRepul()) {
+        player.repulsion();
       }
     }
     if (hyperspacing == false) {
@@ -149,6 +162,16 @@ public void draw()
       if (!hyperspacing)
         player.invinRing();
     }
+    if (player.getRepul() && (repulTimer > 0)) {
+      if (!hyperspacing)
+        player.repulRing();
+        for (int i = 0; i < asteroids.size(); i++) {
+          if(dist((float)player.getCenterX(), (float)player.getCenterY(), (float)asteroids.get(i).getCenterX(), (float)asteroids.get(i).getCenterY()) < 60) {
+            asteroids.get(i).setXspeed((int)(-asteroids.get(i).getXspeed()));
+            asteroids.get(i).setYspeed((int)(-asteroids.get(i).getYspeed()));
+          }
+        }
+    }
     player.move();
     player.show(hyperspacing);
     if (leftPressed) {
@@ -160,10 +183,11 @@ public void draw()
     if (playerAlive) {
       fill(0, 0, 0, 10);
       stroke(255);
-      rect(5, 5, 200, 100, 7);
+      rect(5, 5, 200, 150, 7);
       showHealth();
       showPoints();
       showInvinCD();
+      showRepulCD();
     }
     if (accelerating) {
       player.accelerate(0.04);
@@ -224,11 +248,19 @@ public void keyPressed() {
     lives = 3;
     points = 0;
     addHealth = 0;
+    repulTimer = 60;
+    repulCooldown = 360;
   }
   if (key == '1') {
     if (player.getinvincible() == false && invinCooldown == 0) {
       invinCooldown = 360;
       player.invincibility();  
+    }
+  }
+  if (key == '2') {
+    if (player.getRepul() == false && repulCooldown == 0) {
+      repulCooldown = 360;
+      player.repulsion();
     }
   }
 }
@@ -323,4 +355,21 @@ public void showInvinCD() {
      fill(0, 255, 0);
      text("READY!", 70, 85);
    }
+}
+
+public void showRepulCD() {
+   stroke(255);
+   fill(255);
+   textSize(20);
+   text("2 CD:", 10, 110);
+   if (repulCooldown > 0) {
+     stroke(255);
+     strokeWeight(1);
+     fill(255, 0, 255);
+     rect(70, 92.5, repulCooldown / 3, 20, 7);
+   } else {
+     stroke(0, 255, 0);
+     fill(0, 255, 0);
+     text("READY!", 70, 110);
+   } 
 }
