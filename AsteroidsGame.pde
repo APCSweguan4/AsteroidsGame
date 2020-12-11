@@ -123,8 +123,9 @@ public void draw()
     if (playerAlive) {
       fill(0, 0, 0, 10);
       stroke(255);
-      rect(5, 5, 200, 50, 7);
+      rect(5, 5, 200, 100, 7);
       showHealth();
+      showInvinCD();
     }
     if (accelerating) {
       player.accelerate(0.04);
@@ -253,4 +254,21 @@ public void showHealth() {
   for (int i = 0; i < health.size(); i++) {
     health.get(i).show();  
   }
+}
+
+public void showInvinCD() {
+   stroke(255);
+   fill(255);
+   textSize(20);
+   text("1 CD:", 10, 57.5);
+   if (invinCooldown > 0) {
+     stroke(255);
+     strokeWeight(1);
+     fill(0, 0, 255);
+     rect(70, 40, invinCooldown / 3, 20, 7);
+   } else {
+     stroke(0, 255, 0);
+     fill(0, 255, 0);
+     text("READY!", 70, 57.5);
+   }
 }
