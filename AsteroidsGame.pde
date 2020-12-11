@@ -166,7 +166,7 @@ public void draw()
       if (!hyperspacing)
         player.repulRing();
         for (int i = 0; i < asteroids.size(); i++) {
-          if(dist((float)player.getCenterX(), (float)player.getCenterY(), (float)asteroids.get(i).getCenterX(), (float)asteroids.get(i).getCenterY()) < 60) {
+          if(dist((float)player.getCenterX(), (float)player.getCenterY(), (float)asteroids.get(i).getCenterX(), (float)asteroids.get(i).getCenterY()) < 45) {
             asteroids.get(i).setXspeed((int)(-asteroids.get(i).getXspeed()));
             asteroids.get(i).setYspeed((int)(-asteroids.get(i).getYspeed()));
           }
