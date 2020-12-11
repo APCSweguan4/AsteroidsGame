@@ -5,7 +5,7 @@ private Star[] sky = new Star[500];
 private boolean leftPressed, rightPressed, accelerating, hyperspacing = false;
 private boolean playerAlive = true;
 private int countdown = 30;
-private int shotCooldown, points = 0;
+private int shotCooldown, points, addHealth = 0;
 private int deathCountdown = 60;
 private int invinTimer = 120;
 private int lives = 3;
@@ -44,8 +44,9 @@ public void draw()
   if (lives == 0) {
      playerAlive = false;  
   }
-  if (points != 0 && points % 1000 == 0) {
+  if (points != 0 && points % 1000 == 0 && points / 1000 != addHealth) {
     if (lives != 6) {
+      addHealth++;
       lives++;
     }
   }
