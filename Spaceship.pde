@@ -1,6 +1,6 @@
 class Spaceship extends Floater  
 {   
- private boolean invincible;
+ private boolean invincible, repulsing;
  private int[] rocketXPoints, rocketYPoints;
  public Spaceship() { //constructor
    rocketXPoints = new int[]{-2, -6, -25, -6, -2};
@@ -13,6 +13,7 @@ class Spaceship extends Floater
    myXspeed = myYspeed = 0;
    myPointDirection = (int)(Math.random() * 361);  
    invincible = false;
+   repulsing = false;
  }
   public Spaceship(int x) { //dummy constructor
    rocketXPoints = new int[]{-1, -3, -12, -3, -1};
@@ -60,6 +61,9 @@ class Spaceship extends Floater
  }
  public boolean getinvincible() {
    return invincible;  
+ }
+ public boolean getRepul() {
+   return repulsing;  
  }
  //^^ end of setters & getters ^^
  public void hyperspace() {
@@ -118,5 +122,17 @@ class Spaceship extends Floater
     noFill();
     stroke(0, 0, 255);
     ellipse((float)myCenterX, (float)myCenterY, 35, 35);
+  }
+  public void repulsion() {
+    if (repulsing == false) {
+      repulsing = true;
+    } else {
+      repulsing = false; 
+    }
+  }
+  public void repulRing() {
+    fill(255, 0, 255, 100);
+    stroke(255, 0, 255);
+    ellipse((float)myCenterX, (float)myCenterY, 150, 150);
   }
 }
