@@ -1,6 +1,8 @@
 class Asteroid extends Floater {
+  private boolean isSmall;
   private double rotSpeed, randNum;
   public Asteroid() {
+    isSmall = false;
     randNum = Math.random();
     rotSpeed = Math.random() * 11 - 5;
     if (randNum < 0.2)  {
@@ -68,5 +70,8 @@ class Asteroid extends Floater {
     }
     public double getCenterY() {
       return myCenterY;
+  }
+  public boolean getSmall() {
+    return isSmall;  
   }
 }
