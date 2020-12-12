@@ -59,12 +59,13 @@ public void draw()
   if (lives == 0) {
      playerAlive = false;  
   }
-  if (points != 0 && (int)(points / 1000) != addHealth) {
+  if (points != 0 && Math.floor(points / 1000.0) != addHealth) {
     if (lives != 6) {
       addHealth++;
       lives++;
     }
   }
+  System.out.println(points/1000);
   if (playerAlive) {
     if (player.getinvincible() && (invinTimer > 0) && !hyperspacing) {
       invinCooldown = 360;
@@ -276,6 +277,9 @@ public void keyPressed() {
       bullets.add(new Bullet(player, player.getPointDirection() - 15));
       bullets.add(new Bullet(player, player.getPointDirection() + 15));
     }
+  }
+  if (key == 'p') {
+    points += 1000;  
   }
 }
 public void keyReleased() {
