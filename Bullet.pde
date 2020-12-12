@@ -8,6 +8,14 @@ class Bullet extends Floater {
     myPointDirection = theShip.getPointDirection();
     accelerate(7);
   }
+  public Bullet(Spaceship theShip, double x) {
+    myCenterX = theShip.getCenterX();
+    myCenterY = theShip.getCenterY();
+    myXspeed = theShip.getXspeed();
+    myYspeed = theShip.getYspeed();
+    myPointDirection = x;
+    accelerate(7);
+  }
   public void show() {
     noStroke();
     fill(255);
