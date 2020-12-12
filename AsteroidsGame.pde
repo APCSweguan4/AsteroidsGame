@@ -8,7 +8,7 @@ private boolean playerAlive = true;
 private int countdown = 30;
 private int shotCooldown, points, addHealth = 0;
 private int deathCountdown = 60;
-private int invinTimer = 120;
+private int invinTimer, shotTimer = 120;
 private int lives = 3;
 private int invinCooldown = 360;
 private int repulCooldown = 420;
@@ -89,6 +89,9 @@ public void draw()
       if (player.getRepul()) {
         player.repulsion();
       }
+    }
+    if (shotTimer > 0) {
+      shotTimer--;  
     }
     if (hyperspacing == false) {
       background(0);
@@ -189,6 +192,7 @@ public void draw()
       showPoints();
       showInvinCD();
       showRepulCD();
+      showShotCD();
     }
     if (accelerating) {
       player.accelerate(0.04);
@@ -251,6 +255,7 @@ public void keyPressed() {
     addHealth = 0;
     repulTimer = 60;
     repulCooldown = 420;
+    shotTimer = 120;
   }
   if (key == '1') {
     if (player.getinvincible() == false && invinCooldown == 0) {
@@ -262,6 +267,14 @@ public void keyPressed() {
     if (player.getRepul() == false && repulCooldown == 0) {
       repulCooldown = 420;
       player.repulsion();
+    }
+  }
+  if (key == '3') {
+    if (shotTimer == 0) {
+      shotTimer = 120;
+      bullets.add(new Bullet(player));
+      bullets.add(new Bullet(player, player.getPointDirection() - 15));
+      bullets.add(new Bullet(player, player.getPointDirection() + 15));
     }
   }
 }
@@ -372,5 +385,22 @@ public void showRepulCD() {
      stroke(0, 255, 0);
      fill(0, 255, 0);
      text("READY!", 70, 110);
+   } 
+}
+
+public void showShotCD() {
+   stroke(255);
+   fill(255);
+   textSize(20);
+   text("3 CD:", 10, 135);
+   if (shotTimer > 0) {
+     stroke(255);
+     strokeWeight(1);
+     fill(255, 255, 0);
+     rect(70, 117.5, shotTimer / 3, 20, 7);
+   } else {
+     stroke(0, 255, 0);
+     fill(0, 255, 0);
+     text("READY!", 70, 135);
    } 
 }
