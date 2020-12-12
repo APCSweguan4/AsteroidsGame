@@ -65,7 +65,6 @@ public void draw()
       lives++;
     }
   }
-  System.out.println(points/1000);
   if (playerAlive) {
     if (player.getinvincible() && (invinTimer > 0) && !hyperspacing) {
       invinCooldown = 360;
