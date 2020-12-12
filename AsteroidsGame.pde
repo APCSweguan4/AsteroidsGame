@@ -59,7 +59,7 @@ public void draw()
   if (lives == 0) {
      playerAlive = false;  
   }
-  if (points != 0 && (int)(points / 1000) != addHealth) {
+  if (points != 0 && (points / 1000) != addHealth) {
     if (lives != 6) {
       addHealth++;
       lives++;
